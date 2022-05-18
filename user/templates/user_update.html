@@ -1,0 +1,10 @@
+{% extends 'base_user.html' %}
+{% block content %}
+    <form action="{% url 'update_user' object.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update USER">
+    </form>
+    <br><br>
+    <a href="{% url 'delete_user' object.id %}">Delete</a>
+{% endblock %}

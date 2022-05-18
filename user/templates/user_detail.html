@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base_user.html' %}
+{% block content %}
+    Title: {{ object.title }}<br>
+    Name: {{ object.name }}<br>
+    Age: {{ object.calcul_age }}<br>
+    Gender: {{ object.get_gender_display }}<br>
+    birth_date: {{ object.born_at|date:"d.m Y"}}<br><br>
+{% endblock %}
