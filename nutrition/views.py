@@ -48,4 +48,4 @@ class ContactView(FormView):
         return TemplateResponse(self.request, 'contact.html', context={'form': ContactForm()})
 
     def form_invalid(self, form):
-        return TemplateResponse(self.request, 'nutrition/templates/contact.html', context={'form': form})
+        return TemplateResponse(self.request, 'contact.html', context={'form': form})

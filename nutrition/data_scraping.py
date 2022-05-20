@@ -3,7 +3,7 @@ import requests
 import re
 
 
-def searchMFP(search_term):
+def search_mfp(search_term):
     resp = requests.get('https://www.myfitnesspal.com/food/search?page=1&search=' + search_term)
     soup = bs.BeautifulSoup(resp.text, 'lxml')
 

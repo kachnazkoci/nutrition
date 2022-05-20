@@ -1,5 +1,5 @@
 from django import forms
-from user.models import User
+from food.models import Food
 from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
@@ -20,15 +20,15 @@ class DateFieldSevenDaysFromNow(forms.DateField):
             raise ValidationError('Cannot create contact at earlier that 7 days from now')
 
 
-class UserForm(forms.ModelForm):
-    birth_date = forms.DateField(widget=DatePickerDateInput())
+class FoodForm(forms.ModelForm):
+    released = forms.DateField(widget=DatePickerDateInput())
 
     class Meta:
-        model = User
+        model = Food
         fields = '__all__'
 
     def save(self, commit=True):
-        user = super(UserForm, self).save(commit=commit)
+        user = super(FoodForm, self).save(commit=commit)
         return user
 
 

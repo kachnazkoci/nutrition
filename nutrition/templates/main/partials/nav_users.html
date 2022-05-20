@@ -11,26 +11,25 @@ Start Navigation Bar
                         <b class="fas fa-bars"></b>
                     </a>
                 </div>
-            <form class="d-flex" method="post" action="{% url 'search_location' %}"
-            >
+            {% comment %}<form class="d-flex" method="post" action="{% url 'search_location' %}"
+            >{% endcomment %}
                 {% csrf_token %}
 
                 <input class="form-control me-2"
                        type="search" name="search" placeholder="
                        Search" aria-label="Search..">
                 <button class="btn
-                btn-outline-secondary" type="
-                submit"> SEARCH </button>
+                btn-outline-secondary" type="submit"> SEARCH </button>
             </form>
             </div>
 
         </div>
         <div class="sidebar">
             <div class="profile">
-                <img src="https://tinyurl.com/45a43mpv" alt="movie_picture">
-                <h3>Movies</h3>
-                <p>are like an expensive <br>form of&nbsp;therapy.
-                    <br><i>Tim Burton</i></p>
+                <img src="https://tinyurl.com/397p4mxm" alt="user_picture">
+                <h3>Users</h3>
+                <p> accounts
+                    <br><i>for everyone!</i></p>
 
             </div>
             <ul>
@@ -40,12 +39,12 @@ Start Navigation Bar
                         <span class="item">Home</span>
                     </a>
                 </li>
-                <li>
+                {% comment %}<li>
                     <a href="{% url 'user_detail' %}">
                         <span class="icon"><i class="fas fa-user-friends"></i></span>
                         <span class="item">User Profile</span>
                     </a>
-                </li>
+                </li>{% endcomment %}
                 <li>
                     <a href="{% url 'users' %}">
                         <span class="icon"><i class="fas fa-film"></i></span>
