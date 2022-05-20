@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base_food.html' %}
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      Are you sure you want to delete food "{{ object.name }}" from database?
+    </p>
+    <input type="submit" value="Delete">
+  </form>
+{% endblock %}

@@ -2,8 +2,6 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 from nutrition.views import HomeView, ContactView
-from user import views
-from food import views
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -11,7 +9,6 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name='contact'),
     path('users/', include('user.urls'), name='users'),
     path('food/', include('food.urls'), name='food'),
-    path('food/<int:pk>/', views.FoodDetailView.as_view()),
 ]
 
 

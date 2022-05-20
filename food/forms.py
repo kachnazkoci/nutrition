@@ -1,5 +1,5 @@
 from django import forms
-from food.models import Food
+from food.models import Food, Recipe
 from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
@@ -21,7 +21,7 @@ class DateFieldSevenDaysFromNow(forms.DateField):
 
 
 class FoodForm(forms.ModelForm):
-    released = forms.DateField(widget=DatePickerDateInput())
+    created = forms.DateField(widget=DatePickerDateInput())
 
     class Meta:
         model = Food
@@ -30,6 +30,18 @@ class FoodForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(FoodForm, self).save(commit=commit)
         return user
+
+
+class RecipeForm(forms.ModelForm):
+    created = forms.DateField(widget=DatePickerDateInput())
+
+    class Meta:
+        model = Recipe
+        fields = '__all__'
+
+    def save(self, commit=True):
+        recipe = super(RecipeForm, self).save(commit=commit)
+        return recipe
 
 
 class ContactForm(forms.Form):

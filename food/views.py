@@ -3,8 +3,8 @@ from django.db import models
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import FoodForm
-from .models import Food
+from .forms import FoodForm, RecipeForm
+from .models import Food, Recipe
 
 
 # def food_list_view(request):
@@ -57,3 +57,41 @@ class DeleteFoodView(DeleteView):
     model = Food
     success_url = reverse_lazy('food')
     extra_context = {'page_name': Food}
+
+
+class RecipeListView(ListView):
+    model = Recipe
+    template_name = 'recipes.html'
+    extra_context = {'page_name': 'Recipes'}
+
+
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'recipe_detail.html'
+    extra_context = {'page_name': Recipe.name}
+
+    def get_context_data(self, **kwargs):
+        context = super(RecipeDetailView, self).get_context_data(**kwargs)
+        context.update({'page_name': self.object.name})
+        return context
+
+
+class CreateRecipeView(CreateView):
+    template_name = 'recipe_create.html'
+    form_class = RecipeForm
+    model = Recipe
+    extra_context = {'page_name': 'Add RECIPE'}
+
+
+class UpdateRecipeView(UpdateView):
+    template_name = 'recipe_update.html'
+    form_class = RecipeForm
+    model = Recipe
+    extra_context = {'page_name': Recipe}
+
+
+class DeleteRecipeView(DeleteView):
+    template_name = 'recipe_delete.html'
+    model = Recipe
+    success_url = reverse_lazy('recipes')
+    extra_context = {'page_name': Recipe}

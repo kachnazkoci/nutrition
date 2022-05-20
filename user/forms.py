@@ -22,6 +22,7 @@ class DateFieldSevenDaysFromNow(forms.DateField):
 
 class UserForm(forms.ModelForm):
     birth_date = forms.DateField(widget=DatePickerDateInput())
+    created_date = forms.DateField(widget=DatePickerDateInput())
 
     class Meta:
         model = User

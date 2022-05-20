@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base_food.html' %}
+{% block content %}
 
-</body>
-</html>
+
+    {% for user in object_list %}
+        <p>{{ user.name }} age: {{ user.calcul_age }} - <a href="{% url "recipe_detail" user.id %}">detail</a> - <a
+                href="{% url "recipe_update" recipe.id %}">update</a></p>
+    {% endfor %}
+{% endblock %}
