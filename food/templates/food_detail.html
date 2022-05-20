@@ -1,0 +1,14 @@
+{% extends 'base_food.html' %}
+{% block content %}
+    Name: {{ object.name }}<br>
+    Created: {{ object.created|date:"d.m Y" }}<br>
+    kCal: {{ object.kcal }}<br>
+    Protein: {{ object.protein }}<br>
+    Fats: {{ object.fats }}<br>
+    Carbs: {{ object.carbs }}<br>
+    Recipe:<br><br>
+    {% for recipe in object.recipes.all %}
+        {{ recipe.name }}<br>
+    {% endfor %}
+    <br><br>
+{% endblock %}
