@@ -28,6 +28,15 @@ from django.shortcuts import resolve_url
 #         print("Birth date is invalid!")
 #     return age
 
+
+# def gender_check(title_asked):
+#     if User.title == 0:
+#         gender = 'male'
+#     elif User.title == 1 or User.title == 2:
+#         gender = 'female'
+#     return gender
+
+
 class User(models.Model):
     GENDER_MALE = 'male'
     GENDER_FEMALE = 'female'
@@ -47,8 +56,11 @@ class User(models.Model):
     name = models.CharField(max_length=256)
     title = models.CharField(choices=TITLE_SELECT, max_length=5)
     birth_date = models.DateField()
-    #age = calculate_age(birth_date)
+    # age = calculate_age(birth_date)
     created_date = models.DateField()
+
+    #gender = gender_check(title)
+
     gender = models.CharField(choices=GENDER_CHOICES, max_length=100)
 
     def __str__(self):
@@ -56,3 +68,6 @@ class User(models.Model):
 
     def get_absolute_url(self):
         return resolve_url('user_detail', pk=self.id)
+
+
+
