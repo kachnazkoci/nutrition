@@ -1,0 +1,12 @@
+{% extends 'base_food.html' %}
+{% block content %}
+    <form action="{% url 'blog_create' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value=" ADD POST">
+    </form>
+
+
+
+{% endblock %}
+

@@ -1,7 +1,8 @@
 from django.urls import path
 
 from food.views import FoodListView, CreateFoodView, UpdateFoodView, DeleteFoodView, RecipeListView, \
-    CreateRecipeView, UpdateRecipeView, DeleteRecipeView, FoodDetailView, RecipeDetailView
+    CreateRecipeView, UpdateRecipeView, DeleteRecipeView, FoodDetailView, RecipeDetailView, BlogView, BlogDetailView, \
+    CreateBlogView
 from nutrition.views import ContactView, HomeView
 
 
@@ -17,5 +18,8 @@ urlpatterns = (
     path('recipe/create/', CreateRecipeView.as_view(), name='recipe_create'),
     path('recipe/update/<int:pk>/', UpdateRecipeView.as_view(), name='recipe_update'),
     path('recipe/delete/<int:pk>/', DeleteRecipeView.as_view(), name='recipe_delete'),
+    path('blog/', BlogView.as_view(), name="blog"),
+    path('blog/create/', CreateBlogView.as_view(), name='blog_create'),
+    path('blog/<int:pk>/', BlogDetailView.as_view(), name="blog_detail"),
     path('contact/', ContactView.as_view(), name='contact_view')
 )
