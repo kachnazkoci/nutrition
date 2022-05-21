@@ -9,3 +9,8 @@ class HomeAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'contact_at', )
     list_filter = ('name',)
+
+
+class FoodAdmin(admin.ModelAdmin):
+    list_display = ('food', 'contact', 'language')
+    list_filter = ('language',)

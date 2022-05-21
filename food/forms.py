@@ -37,7 +37,8 @@ class RecipeForm(forms.ModelForm):
 
     class Meta:
         model = Recipe
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['name', 'kcal','protein','fats','carbs','food']
 
     def save(self, commit=True):
         recipe = super(RecipeForm, self).save(commit=commit)

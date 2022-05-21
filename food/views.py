@@ -1,5 +1,3 @@
-from django.shortcuts import render, resolve_url
-from django.db import models
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -49,14 +47,14 @@ class UpdateFoodView(UpdateView):
     template_name = 'food_update.html'
     form_class = FoodForm
     model = Food
-    extra_context = {'page_name': Food}
+    extra_context = {'page_name': 'Food'}
 
 
 class DeleteFoodView(DeleteView):
     template_name = 'food_delete.html'
     model = Food
     success_url = reverse_lazy('food')
-    extra_context = {'page_name': Food}
+    extra_context = {'page_name': 'Food'}
 
 
 class RecipeListView(ListView):

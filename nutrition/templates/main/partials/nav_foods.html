@@ -12,26 +12,26 @@ Start Navigation Bar
                         <b class="fas fa-bars"></b>
                     </a>
                 </div>
-            <form class="d-flex" method="post" action="{% url 'search_location' %}"
-            >
-                {% csrf_token %}
+{#                <form class="d-flex" method="post" action="{% url 'search_location' %}">#}
+                    {% csrf_token %}
 
-                <input class="form-control me-2"
-                       type="search" name="search" placeholder="
+                    <input class="form-control me-2"
+                           type="search" name="search" placeholder="
                        Search" aria-label="Search..">
-                <button class="btn
+                    <button class="btn
                 btn-outline-secondary" type="
-                submit"> SEARCH </button>
-            </form>
+                submit"> SEARCH
+                    </button>
+                </form>
             </div>
 
         </div>
         <div class="sidebar">
             <div class="profile">
-                <img src="https://tinyurl.com/eejmku59" alt="books_picture">
-                <h3>Books</h3>
-                <p>are uniquely portable magic.
-                    <br><i>Stephen King</i></p>
+                <img src="https://www.kindpng.com/picc/m/334-3347394_healthy-food-filled-icon-transparent-healthy-food-icon.png"
+                     alt="food_picture">
+                <h3>Food</h3>
+                <p>Good food is wise medicine.</p>
 
             </div>
             <ul>
