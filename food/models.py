@@ -36,3 +36,7 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return resolve_url('recipe_detail', pk=self.id)
+
+
+class BMICounter(models.Model):
+    pass
