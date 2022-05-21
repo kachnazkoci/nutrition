@@ -23,7 +23,7 @@ class Food(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
-    ingredients = models.CharField()
+    ingredients = models.CharField(max_length=256)
     food = models.ManyToManyField(Food, related_name='recipes')
     kcal = models.IntegerField()
     protein = models.IntegerField()
