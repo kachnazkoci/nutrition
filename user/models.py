@@ -71,3 +71,4 @@ class User(models.Model):
 
 
 
+from django.contrib.auth import models
