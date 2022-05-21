@@ -1,0 +1,15 @@
+{% extends 'base_food.html' %}
+{% block content %}
+    Name: {{ object.name }}<br>
+    Weight: 100g:
+        kcal:{{ object.kcal100 }}<br>
+        protein:{{ object.protein100 }}<br>
+        fats:{{ object.fats100 }}<br>
+        carbs:{{ object.carbs100 }}<br>
+    Weight:{{ object.weight }}g<br>    
+        kcal:{{ object.kcal }}<br>
+        protein:{{ object.protein }}<br>
+        fats:{{ object.fats }}<br>
+        carbs:{{ object.carbs }}<br>
+<br><br>
+{% endblock %}

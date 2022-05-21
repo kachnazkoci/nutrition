@@ -25,7 +25,8 @@ class Food(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
-    ingredients = models.CharField(max_length=256)
+    ingredients = models.ManyToManyField(Food, through='Amount')
+    weight = models.IntegerField()
     food = models.ManyToManyField(Food, related_name='recipes')
     kcal = models.IntegerField()
     protein = models.IntegerField()
@@ -38,6 +39,12 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return resolve_url('recipe_detail', pk=self.id)
+
+
+class Amount(models.Model):
+    food_choice_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe_weight_food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    amount = models.IntegerField()
 
 
 class Blog(models.Model):
