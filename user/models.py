@@ -62,6 +62,8 @@ class User(models.Model):
     #gender = gender_check(title)
 
     gender = models.CharField(choices=GENDER_CHOICES, max_length=100)
+    height = models.IntegerField(null=True, blank=True)
+    weight = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.name} : {self.id}'
@@ -70,4 +72,4 @@ class User(models.Model):
         return resolve_url('user_detail', pk=self.id)
 
 
-from django.contrib.auth import models
+

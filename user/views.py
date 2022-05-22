@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from .forms import UserForm
 from .models import User
+from food.BMI_counter import bmi
 
 
 # def user_list_view(request):
@@ -33,8 +34,15 @@ class UserDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context.update({'page_name': self.object.name})
+        context.update({'page_name':self.object.name})
+        context['bmi'] = bmi(self.object.weight, self.object.height)
         return context
+
+
+# class BMIcounterView(TemplateView):
+#     template_name = 'counter_BMI.html'
+#     success_url = reverse_lazy('user')
+#     # extra_context = {'page_name': User}
 
 
 class CreateUserView(CreateView):
@@ -56,7 +64,6 @@ class DeleteUserView(DeleteView):
     model = User
     success_url = reverse_lazy('users')
     extra_context = {'page_name': User}
-
 
 # def search_location(request):
 #     context = {

@@ -17,7 +17,7 @@ class HomeView(View):
     @staticmethod
     def get(request):
         context = {
-            #'number_of_users': User.objects.all().count(),
+            'number_of_users': User.objects.all().count(),
             'page_name': 'Home'
         }
         return TemplateResponse(request, 'home.html', context=context)
