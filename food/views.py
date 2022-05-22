@@ -1,9 +1,9 @@
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
 from .forms import FoodForm, RecipeForm, BlogForm
-from .models import Food, Recipe, Blog, BMICounter
+from .models import Food, Recipe, Blog
 
 
 #########################################
@@ -125,8 +125,5 @@ class CreateBlogView(CreateView):
     model = Blog
     extra_context = {'page_name': 'Add BLOG Post'}
 
-class BMIcounterView(ListView):
-    template_name = 'counter_BMI.html'
-    model = BMICounter
-    success_url = reverse_lazy('user')
-    # extra_context = {'page_name': User}
+
+

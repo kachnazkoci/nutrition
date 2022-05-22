@@ -1,13 +1,14 @@
-from food.models import weight, height
+from user.models import User
 
 
-def BMI(weight, height):
-    x = weight/(height * height)
+def bmi(weight, height):
+
+    x = weight/((height/100) * (height/100))
     if x <= 18.5:
-        return "Underweight"
+        return "Underweight", x
     elif 18.5 < x <= 25:
-        return "Normal weight"
+        return "Normal weight", x
     elif 25 < x < 30:
-        return "Overweight"
+        return "Overweight", x
     else:
-        return "Obesity"
+        return "Obesity", x

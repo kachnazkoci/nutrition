@@ -4,5 +4,7 @@
     Name: {{ object.name }}<br>
     Age: {{ object.calcul_age }}<br>
     Gender: {{ object.get_gender_display }}<br>
-    birth_date: {{ object.born_at|date:"d.m Y"}}<br><br>
+    Birth date: {{ object.birth_date|date:"d.m. Y"}}<br>
+    BMI: {{ bmi.0}}<br>
+    BMI value: {{ bmi.1}}<br><br>
 {% endblock %}
