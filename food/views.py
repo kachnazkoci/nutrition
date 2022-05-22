@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import FoodForm, RecipeForm
-from .models import Food, Recipe
+from .models import Food, Recipe, BMICounter
 
 
 # def food_list_view(request):
@@ -93,3 +93,10 @@ class DeleteRecipeView(DeleteView):
     model = Recipe
     success_url = reverse_lazy('recipes')
     extra_context = {'page_name': Recipe}
+
+
+class BMIcounterView(ListView):
+    template_name = 'counter_BMI.html'
+    model = BMICounter
+    success_url = reverse_lazy('user')
+    # extra_context = {'page_name': User}
