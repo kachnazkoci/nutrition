@@ -7,20 +7,6 @@ from .models import User
 from food.BMI_counter import bmi
 
 
-# def user_list_view(request):
-#     users = User.objects.all()
-#     context = {
-#         'users': users
-#     }
-#     return render(request, 'users.html', context)
-
-
-# def user_search_view(request):
-#     context = {}
-#     return render(request, 'search/search_user.html',
-#                   context=context)
-
-
 class UserListView(ListView):
     model = User
     template_name = 'users.html'
@@ -37,12 +23,6 @@ class UserDetailView(DetailView):
         context.update({'page_name':self.object.name})
         context['bmi'] = bmi(self.object.weight, self.object.height)
         return context
-
-
-# class BMIcounterView(TemplateView):
-#     template_name = 'counter_BMI.html'
-#     success_url = reverse_lazy('user')
-#     # extra_context = {'page_name': User}
 
 
 class CreateUserView(CreateView):
