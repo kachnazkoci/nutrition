@@ -1,7 +1,8 @@
 from food.models import Recipe, Food
 
 
-def convert_values(new_weight):
+def convert_values(food_choice, new_weight):
+
     conv_kcal, conv_protein, conv_fats, conv_carbs = 0, 0, 0, 0
     if new_weight != 100:
         conv_kcal = (Food.kcal / 100) * Recipe.weight
