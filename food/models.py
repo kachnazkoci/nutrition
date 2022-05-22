@@ -72,3 +72,21 @@ class Blog(models.Model):
 
     def get_absolute_url(self):
         return resolve_url('blog_detail', pk=self.id)
+
+
+class BMICounter(models.Model):
+    GENDER_MALE = 'male'
+    GENDER_FEMALE = 'female'
+
+    GENDER_CHOICES = (
+        (GENDER_MALE, 'male'),
+        (GENDER_FEMALE, 'female')
+    )
+
+    height = models.IntegerField()
+    weight = models.IntegerField()
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=100)
+
+
+    def get_absolute_url(self):
+        return resolve_url('counter_BMI', pk=self.id)
