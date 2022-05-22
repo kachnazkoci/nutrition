@@ -1,5 +1,5 @@
 from django import forms
-from food.models import Food, Recipe
+from food.models import Food, Recipe, Blog
 from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
@@ -56,3 +56,19 @@ class ContactForm(forms.Form):
 
     def clean_name(self):
         return self.data.get('name').lower()
+
+
+class BlogForm(forms.ModelForm):
+    timestamp = forms.DateField(widget=DatePickerDateInput())
+    name = forms.CharField()
+    description = forms.CharField(max_length=256)
+    body = forms.CharField(widget=forms.Textarea())
+    image = forms.ImageField()
+
+    class Meta:
+        model = Blog
+        fields = '__all__'
+
+    def save(self, commit=True):
+        user = super(BlogForm, self).save(commit=commit)
+        return user

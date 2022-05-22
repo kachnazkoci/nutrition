@@ -1,10 +1,14 @@
 from django.urls import reverse_lazy
+from django.views import generic
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .forms import FoodForm, RecipeForm
-from .models import Food, Recipe
+from .forms import FoodForm, RecipeForm, BlogForm
+from .models import Food, Recipe, Blog, BMICounter
 
 
+#########################################
+#####              FOOD             #####
+#########################################
 # def food_list_view(request):
 #     users = Food.objects.all()
 #     context = {
@@ -57,6 +61,9 @@ class DeleteFoodView(DeleteView):
     extra_context = {'page_name': 'Food'}
 
 
+#########################################
+#####            RECIPES            #####
+#########################################
 class RecipeListView(ListView):
     model = Recipe
     template_name = 'recipes.html'
@@ -93,3 +100,33 @@ class DeleteRecipeView(DeleteView):
     model = Recipe
     success_url = reverse_lazy('recipes')
     extra_context = {'page_name': Recipe}
+
+
+#########################################
+#####              BLOG             #####
+#########################################
+class BlogView(generic.ListView):
+    model = Blog
+    template_name = "blog.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+
+class BlogDetailView(generic.DetailView):
+    model = Blog
+    template_name = "blog_detail.html"
+
+
+class CreateBlogView(CreateView):
+    template_name = 'blog_create.html'
+    form_class = BlogForm
+    model = Blog
+    extra_context = {'page_name': 'Add BLOG Post'}
+
+class BMIcounterView(ListView):
+    template_name = 'counter_BMI.html'
+    model = BMICounter
+    success_url = reverse_lazy('user')
+    # extra_context = {'page_name': User}
