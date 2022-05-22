@@ -70,5 +70,4 @@ class User(models.Model):
         return resolve_url('user_detail', pk=self.id)
 
 
-
 from django.contrib.auth import models
