@@ -1,0 +1,10 @@
+{% extends 'base_food.html' %}
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <p>
+      Are you sure you want to delete article "{{ object.name }}" from blog?
+    </p>
+    <input type="submit" value="Delete">
+  </form>
+{% endblock %}
