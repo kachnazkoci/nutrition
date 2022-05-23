@@ -6,20 +6,6 @@ from .forms import UserForm
 from .models import User
 
 
-# def user_list_view(request):
-#     users = User.objects.all()
-#     context = {
-#         'users': users
-#     }
-#     return render(request, 'users.html', context)
-
-
-# def user_search_view(request):
-#     context = {}
-#     return render(request, 'search/search_user.html',
-#                   context=context)
-
-
 class UserListView(ListView):
     model = User
     template_name = 'users.html'

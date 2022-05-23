@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'nutrition',
     'food',
     'user',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
