@@ -1,5 +1,8 @@
 {% extends 'base_food.html' %}
 {% block content %}
+    <div style="padding-left:16px">
+          <h2>Nutrition - Recipe - {{ object.name }}</h2>
+        </div>
     Name: {{ object.name }}<br>
     Created: {{ object.created|date:"d.m Y" }}<br>
     kCal: {{ object.kcal }}<br>

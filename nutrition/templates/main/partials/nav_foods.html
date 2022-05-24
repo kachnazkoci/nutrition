@@ -15,14 +15,14 @@ Start Navigation Bar
 {#                <form class="d-flex" method="post" action="{% url 'search_location' %}">#}
                     {% csrf_token %}
 
-                    <input class="form-control me-2"
+                    {% comment %}<input class="form-control me-2"
                            type="search" name="search" placeholder="
                        Search" aria-label="Search..">
                     <button class="btn
                 btn-outline-secondary" type="
                 submit"> SEARCH
                     </button>
-                </form>
+                </form>{% endcomment %}
             </div>
 
         </div>

@@ -17,7 +17,9 @@
         <div class="row g-3 g-md-4 g-lg-5 portfolioRow">
           {% for blog in object_list %}
               <div class="col-md-6 pColMain">
-                  <div class="pCol"><b><i>{{ blog.name }}</b></i> <sup>{{ blog.timestamp }}</sup>
+                  <div class="pCol">
+                      <b><i>{{ blog.name }}</i></b>
+                      <sub>{{ blog.timestamp }}</sub>
                     - <a href="{% url "blog_detail" blog.id %}">detail</a>
                     - <a href="{% url "blog_update" blog.id %}">update</a>
                     <img src="{{obj.image.url}}" alt="..." class="pImg">
