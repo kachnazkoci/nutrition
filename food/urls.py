@@ -1,5 +1,6 @@
 from django.urls import path, re_path
 
+
 from food.views import FoodListView, CreateFoodView, UpdateFoodView, DeleteFoodView, RecipeListView, \
     CreateRecipeView, UpdateRecipeView, DeleteRecipeView, FoodDetailView, RecipeDetailView, BlogView, BlogDetailView, \
     CreateBlogView, DeleteBlogView, UpdateBlogView
