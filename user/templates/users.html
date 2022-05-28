@@ -3,7 +3,7 @@
 
 
     {% for user in object_list %}
-        <p>{{ user.name }} age: {{ user.calcul_age }} - <a href="{% url "user_detail" user.id %}">detail</a> - <a
+        <p>{{ user.name }} age: {{ user.age }} - <a href="{% url "user_detail" user.id %}">detail</a> - <a
                 href="{% url "user_update" user.id %}">update</a></p>
     {% endfor %}
 {% endblock %}

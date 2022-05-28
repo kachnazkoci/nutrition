@@ -58,23 +58,6 @@ p:not(.intro) {
     -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-/*blog*/
-.blog_strip {
-    position: fixed;
-    top: 0;
-    left: -30%;
-    width: var(--nav-width);
-    height: 100vh;
-    background-color: var(--first-color);
-    padding: .5rem 1rem 0 0;
-    transition: .5s;
-    z-index: var(--z-fixed)
-}
-
-.blog_box {
-    -shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 
 h1,
 h2,

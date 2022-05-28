@@ -7,6 +7,7 @@ from ckeditor.fields import RichTextField
 from user.models import User
 
 
+
 class Food(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
@@ -14,6 +15,7 @@ class Food(models.Model):
     protein = models.IntegerField()
     fats = models.IntegerField()
     carbs = models.IntegerField()
+    #note = models.CharField(max_length=256) # , required=False
 
     def __str__(self):
         return self.name
@@ -55,7 +57,7 @@ class Blog(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=250, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to="static/blog")
+    image = models.ImageField(blank=True, null=True, upload_to="{% static 'images' %}")
     is_active = models.BooleanField(default=True)
 
     # def save(self, commit=True):
