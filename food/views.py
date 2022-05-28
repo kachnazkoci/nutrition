@@ -127,3 +127,5 @@ class CreateBlogView(CreateView):
 
 
 
+
+

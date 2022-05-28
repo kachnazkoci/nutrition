@@ -75,19 +75,9 @@ class Blog(models.Model):
         return resolve_url('blog_detail', pk=self.id)
 
 
-# class BMICounter(models.Model):
-#     GENDER_MALE = 'male'
-#     GENDER_FEMALE = 'female'
-#
-#     GENDER_CHOICES = (
-#         (GENDER_MALE, 'male'),
-#         (GENDER_FEMALE, 'female')
-#     )
-#
-#     height = User.height
-#     weight = User.weight
-#     gender = User.gender
-#
-#
-#     def get_absolute_url(self):
-#         return resolve_url('counter_BMI', pk=self.id)
+# class FoodDatabase(models.Model):
+#     category = models.Charfield(_('Category'), max_lenght=100)
+#     description = models.Charfield(_('Description'), max_lenght=100)
+#     carbohydrate = models.IntegerField(_('Carbohydrate'))
+#     protein = models.IntegerField(_('Protein'))
+#     fat = models.IntegerField(_('Fat'))

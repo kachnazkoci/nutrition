@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .forms import UserForm
 from .models import User
 from food.BMI_counter import bmi
+from food.cal_counter_user import ideal_calories_intake, basal_metabolic_rate, activity_calorie_input
 
 
 # def user_list_view(request):
@@ -34,8 +35,11 @@ class UserDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context.update({'page_name':self.object.name})
+        context.update({'page_name': self.object.name})
         context['bmi'] = bmi(self.object.weight, self.object.height)
+        context['basal_metabolic_rate'] = basal_metabolic_rate(self.object.gender, self.object.weight, self.object.height, self.object.age)
+        context['activity_calorie_input'] = activity_calorie_input(context['basal_metabolic_rate'], self.object.activity)
+        context['ideal_calories_intake'] = ideal_calories_intake(context['activity_calorie_input'], self.object.target)
         return context
 
 

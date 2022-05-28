@@ -6,5 +6,9 @@
     Gender: {{ object.get_gender_display }}<br>
     Birth date: {{ object.birth_date|date:"d.m. Y"}}<br>
     BMI: {{ bmi.0}}<br>
-    BMI value: {{ bmi.1}}<br><br>
+    BMI value: {{ bmi.1}}<br>
+    Target: {{ object.target }}<br>
+    Activities: {{ object.activity }}<br>
+    Ideal Daily Calories Intake: {{ ideal_calories_intake }}<br>
+
 {% endblock %}
