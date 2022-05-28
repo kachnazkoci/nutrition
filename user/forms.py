@@ -44,3 +44,36 @@ class ContactForm(forms.Form):
 
     def clean_name(self):
         return self.data.get('name').lower()
+
+
+# class BasalMetabolism(forms.ModelForm):
+#     ACTIVITY_1 = 'office job, no activities'
+#     ACTIVITY_2 = 'office job, training twice per week'
+#     ACTIVITY_3 = 'office job, training 3-4 times per week'
+#     ACTIVITY_4 = 'office job, training 6 times per week'
+#     ACTIVITY_5 = 'manual job, training 3-4 times per week'
+#     ACTIVITY_6 = 'manual job, training 6 times per week'
+#
+#     ACTIVITY_CHOICES = (
+#         (ACTIVITY_1, 'office job, no activities'),
+#         (ACTIVITY_2, 'office job, training twice per week'),
+#         (ACTIVITY_3, 'office job, training 3-4 times per week'),
+#         (ACTIVITY_4, 'office job, training 6 times per week'),
+#         (ACTIVITY_5, 'manual job, training 3-4 times per week'),
+#         (ACTIVITY_6, 'manual job, training 6 times per week'),
+#     )
+#
+#     TARGET_1 = 'I would like lose weight'
+#     TARGET_2 = 'I just want be as fit as I am'
+#     TARGET_3 = 'I want gain muscles/weight'
+#
+#     TARGET_CHOICES = (
+#         (TARGET_1, 'I would like lose weight'),
+#         (TARGET_2, 'I just want be as fit as I am'),
+#         (TARGET_3, 'I want gain muscles/weight'),
+#
+#     activity = forms.CharField(help_text='How active are you?', choices=ACTIVITY_CHOICES, max_length=255)
+#     target = forms.CharField(help_text='What is your target?', choices=TARGET_CHOICES, max_length=255)
+#     class Meta:
+#         model = BasalMetabolism
+#         fields = '__all__'
