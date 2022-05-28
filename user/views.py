@@ -8,20 +8,6 @@ from food.BMI_counter import bmi
 from food.cal_counter_user import ideal_calories_intake, basal_metabolic_rate, activity_calorie_input
 
 
-# def user_list_view(request):
-#     users = User.objects.all()
-#     context = {
-#         'users': users
-#     }
-#     return render(request, 'users.html', context)
-
-
-# def user_search_view(request):
-#     context = {}
-#     return render(request, 'search/search_user.html',
-#                   context=context)
-
-
 class UserListView(ListView):
     model = User
     template_name = 'users.html'
@@ -41,12 +27,6 @@ class UserDetailView(DetailView):
         context['activity_calorie_input'] = activity_calorie_input(context['basal_metabolic_rate'], self.object.activity)
         context['ideal_calories_intake'] = ideal_calories_intake(context['activity_calorie_input'], self.object.target)
         return context
-
-
-# class BMIcounterView(TemplateView):
-#     template_name = 'counter_BMI.html'
-#     success_url = reverse_lazy('user')
-#     # extra_context = {'page_name': User}
 
 
 class CreateUserView(CreateView):

@@ -1,4 +1,38 @@
 {% extends 'base_food.html' %}
+{% block content %}
+<div class="innerPageBannerCol">
+    <div class="container">
+      <div class="row g-4 g-md-3  align-items-center">
+        <div class="col-md-6">
+          <div class="bannerContent">
+            <h1 class="xlTitle pb-md-3">See our recent blogs below</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="lightBg">
+    <div class="container">
+      <div class="portfolioContentMain">
+        <div class="row g-3 g-md-4 g-lg-5 portfolioRow">
+          {% for blog in object_list %}
+              <div class="col-md-6 pColMain">
+                  <div class="pCol">
+                      <b><i>{{ blog.name }}</i></b>
+                      <sub>{{ blog.timestamp }}</sub>
+                    - <a href="{% url "blog_detail" blog.id %}">detail</a>
+                    - <a href="{% url "blog_update" blog.id %}">update</a>
+                    <img src="{{obj.image.url}}" alt="..." class="pImg">
+                </div>
+              </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+{% comment %}{% extends 'base_food.html' %}
 {% load static %}
 
 <!-- ================================
@@ -27,7 +61,7 @@ Start Content
           {% for obj in object_list %}
           <div class="col-md-6 pColMain">
             <div class="pCol">
-              <a href="{% url 'main:blog' slug=obj.slug %}" >
+              <a href="{% url 'blog_detail' object.pk %}" >
               <img src="{{obj.image.url}}" alt="..." class="pImg">
               </a>
             </div>
@@ -42,4 +76,5 @@ Start Content
 <!-- ================================
 End Content
 ================================= -->
-{%endblock%}
+{%endblock%}{% endcomment %}
+

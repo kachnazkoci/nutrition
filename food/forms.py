@@ -28,12 +28,13 @@ class FoodForm(forms.ModelForm):
         fields = '__all__'
 
     def save(self, commit=True):
-        user = super(FoodForm, self).save(commit=commit)
-        return user
+        food = super(FoodForm, self).save(commit=commit)
+        return food
 
 
 class RecipeForm(forms.ModelForm):
     created = forms.DateField(widget=DatePickerDateInput())
+    food = forms.ModelMultipleChoiceField(queryset=Food.objects.all())
 
     class Meta:
         model = Recipe
@@ -61,14 +62,15 @@ class ContactForm(forms.Form):
 class BlogForm(forms.ModelForm):
     timestamp = forms.DateField(widget=DatePickerDateInput())
     name = forms.CharField()
-    description = forms.CharField(max_length=256)
-    body = forms.CharField(widget=forms.Textarea())
-    image = forms.ImageField()
 
     class Meta:
         model = Blog
         fields = '__all__'
 
     def save(self, commit=True):
-        user = super(BlogForm, self).save(commit=commit)
-        return user
+        blog = super(BlogForm, self).save(commit=commit)
+        blog(self.cleaned_data.get('blog_detail'))
+        return blog
+
+
+

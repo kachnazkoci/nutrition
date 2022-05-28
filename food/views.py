@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import FoodForm, RecipeForm, BlogForm
 from .models import Food, Recipe, Blog
@@ -108,13 +108,14 @@ class DeleteRecipeView(DeleteView):
 class BlogView(generic.ListView):
     model = Blog
     template_name = "blog.html"
-    paginate_by = 10
+    # paginate_by = 10
+    extra_context = {'page_name': 'Blog'}
 
     def get_queryset(self):
         return super().get_queryset().filter(is_active=True)
 
 
-class BlogDetailView(generic.DetailView):
+class BlogDetailView(DetailView):
     model = Blog
     template_name = "blog_detail.html"
 
@@ -126,6 +127,15 @@ class CreateBlogView(CreateView):
     extra_context = {'page_name': 'Add BLOG Post'}
 
 
+class DeleteBlogView(DeleteView):
+    template_name = 'blog_delete.html'
+    model = Blog
+    success_url = reverse_lazy('blog')
+    extra_context = {'page_name': Blog}
 
 
-
+class UpdateBlogView(UpdateView):
+    template_name = 'blog_update.html'
+    form_class = BlogForm
+    model = Blog
+    extra_context = {'page_name': Blog}
