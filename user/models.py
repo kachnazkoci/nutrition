@@ -4,38 +4,6 @@ import datetime
 from django.shortcuts import resolve_url
 
 
-# def calculate_age(born):
-#     month = int(born[:2])
-#     day = int(born[3:5])
-#     year = int(born[6:])
-#     m_valid, d_valid = False
-#     if 1 <= month <= 12:
-#         m_valid = True
-#         return m_valid
-#     if 1 <= day <= 31:
-#         d_valid = True
-#         return d_valid
-#     if m_valid and d_valid:
-#         today = date.today()
-#         d = today.day
-#         m = today.month
-#         y = today.year
-#         if m >= month and d >= day:
-#             age = y - year
-#         else:
-#             age = y - year - 1
-#     else:
-#         print("Birth date is invalid!")
-#     return age
-
-
-# def gender_check(title_asked):
-#     if User.title == 0:
-#         gender = 'male'
-#     elif User.title == 1 or User.title == 2:
-#         gender = 'female'
-#     return gender
-
 
 class User(models.Model):
     GENDER_MALE = 'male'
@@ -46,15 +14,14 @@ class User(models.Model):
         (GENDER_FEMALE, 'female')
     )
 
-    TITLE_SELECT = (
-        ('0', 'Mr.'),
-        ('1', 'Mrs.'),
-        ('2', 'Ms.'),
-    )
+    MR = 'Mr.'
+    MRS = 'Mrs.'
+    MS = 'Ms.'
+
     TITLE_CHOICES = (
-        ('0', 'Mr.'),
-        ('1', 'Mrs.'),
-        ('2', 'Ms.'),
+        (MR, 'Mr.'),
+        (MRS, 'Mrs.'),
+        (MS, 'Ms.'),
     )
 
     ACTIVITY_1 = 'office job, no activities'
@@ -86,7 +53,6 @@ class User(models.Model):
     name = models.CharField(max_length=256)
     title = models.CharField(choices=TITLE_CHOICES, max_length=5)
     birth_date = models.DateField()
-    age = models.IntegerField()
     created_date = models.DateField()
 
     # gender = gender_check(title)

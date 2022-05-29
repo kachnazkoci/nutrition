@@ -39,7 +39,7 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
         # fields = '__all__'
-        fields = ['name', 'kcal','protein','fats','carbs','food']
+        fields = ['name', 'kcal', 'protein', 'fats', 'carbs', 'food']
 
     def save(self, commit=True):
         recipe = super(RecipeForm, self).save(commit=commit)
@@ -62,6 +62,7 @@ class ContactForm(forms.Form):
 class BlogForm(forms.ModelForm):
     timestamp = forms.DateField(widget=DatePickerDateInput())
     name = forms.CharField()
+    image = forms.ImageField()
 
     class Meta:
         model = Blog
@@ -69,8 +70,4 @@ class BlogForm(forms.ModelForm):
 
     def save(self, commit=True):
         blog = super(BlogForm, self).save(commit=commit)
-        blog(self.cleaned_data.get('blog_detail'))
         return blog
-
-
-

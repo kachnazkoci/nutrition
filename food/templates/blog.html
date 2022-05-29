@@ -1,5 +1,6 @@
 {% extends 'base_food.html' %}
 {% block content %}
+{% load static %}
 <div class="innerPageBannerCol">
     <div class="container">
       <div class="row g-4 g-md-3  align-items-center">
@@ -18,11 +19,9 @@
           {% for blog in object_list %}
               <div class="col-md-6 pColMain">
                   <div class="pCol">
-                      <b><i>{{ blog.name }}</i></b>
+                      <a href="{% url "blog_detail" blog.id %}"><b>{{ blog.name }}</b></a>
                       <sub>{{ blog.timestamp }}</sub>
-                    - <a href="{% url "blog_detail" blog.id %}">detail</a>
-                    - <a href="{% url "blog_update" blog.id %}">update</a>
-                    <img src="{{obj.image.url}}" alt="..." class="pImg">
+                    <img src="{% static 'images' %}" alt="..." class="pImg">
                 </div>
               </div>
           {% endfor %}
