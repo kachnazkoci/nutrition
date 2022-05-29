@@ -30,9 +30,8 @@ class Food(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
-    ingredients = models.ManyToManyField(Food, through='Amount')
+    ingredients = models.ManyToManyField(Food, related_name='recipes', through='Amount')
     weight = models.IntegerField()
-    food = models.ManyToManyField(Food, related_name='recipes')
     kcal = models.IntegerField()
     protein = models.IntegerField()
     fats = models.IntegerField()
@@ -46,8 +45,8 @@ class Recipe(models.Model):
 
 
 class Amount(models.Model):
-    food_choice_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    recipe_weight_food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
     amount = models.IntegerField()
 
 
@@ -57,7 +56,7 @@ class Blog(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=250, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to="{% static 'images' %}")
+    image = models.ImageField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     # def save(self, commit=True):

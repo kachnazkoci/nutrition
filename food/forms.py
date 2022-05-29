@@ -31,15 +31,24 @@ class FoodForm(forms.ModelForm):
         food = super(FoodForm, self).save(commit=commit)
         return food
 
+#
+# class RecipeField(forms.Field):
+#     def __init__(self, required, label, inital, widget, help_text):
+#         pass
+#
+#     def clean(self):
+#         pass
+
 
 class RecipeForm(forms.ModelForm):
     created = forms.DateField(widget=DatePickerDateInput())
-    food = forms.ModelMultipleChoiceField(queryset=Food.objects.all())
+    ingredients = forms.ModelMultipleChoiceField(queryset=Food.objects.all())
+    # amount = forms.RecipeField(
 
     class Meta:
         model = Recipe
         # fields = '__all__'
-        fields = ['name', 'kcal', 'protein', 'fats', 'carbs', 'food']
+        fields = ['name', 'kcal', 'protein', 'fats', 'carbs', 'ingredients']
 
     def save(self, commit=True):
         recipe = super(RecipeForm, self).save(commit=commit)
@@ -62,7 +71,7 @@ class ContactForm(forms.Form):
 class BlogForm(forms.ModelForm):
     timestamp = forms.DateField(widget=DatePickerDateInput())
     name = forms.CharField()
-    image = forms.ImageField()
+    # image = forms.ImageField()
 
     class Meta:
         model = Blog

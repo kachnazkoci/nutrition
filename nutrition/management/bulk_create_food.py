@@ -17,5 +17,5 @@ class Command(BaseCommand):
             r = csv.reader(f)
             animals = []
             for row in r:
-                food.append(Food(name=row[0], note=row[1], kcal=row[2], protein=row[2]), fats=row[3], carbs=row[4])
+                food.append(Food(name=row[0], kcal=row[1], protein=row[2]), fats=row[3], carbs=row[4])
         print(len(Food.objects.bulk_create(food)))

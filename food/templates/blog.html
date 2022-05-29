@@ -21,7 +21,7 @@
                   <div class="pCol">
                       <a href="{% url "blog_detail" blog.id %}"><b>{{ blog.name }}</b></a>
                       <sub>{{ blog.timestamp }}</sub>
-                    <img src="{% static 'images' %}" alt="..." class="pImg">
+                    <img src="{{ blog.image.url }}" alt="..."  width="250" height="200" class="pImg">
                 </div>
               </div>
           {% endfor %}

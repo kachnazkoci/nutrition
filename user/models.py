@@ -4,7 +4,6 @@ import datetime
 from django.shortcuts import resolve_url
 
 
-
 class User(models.Model):
     GENDER_MALE = 'male'
     GENDER_FEMALE = 'female'
@@ -56,14 +55,13 @@ class User(models.Model):
     created_date = models.DateField()
 
     # gender = gender_check(title)
-
     gender = models.CharField(choices=GENDER_CHOICES, max_length=100)
-    height = models.IntegerField(null=True, blank=True)
-    weight = models.IntegerField(null=True, blank=True)
-    activity = models.CharField(help_text='How active are you?', choices=ACTIVITY_CHOICES, max_length=255,
-                                default='office job, no activities')
-    target = models.CharField(help_text='What is your target?', choices=TARGET_CHOICES, max_length=255,
-                              default='I would like lose weight')
+    height = models.IntegerField(null=True, blank=True, help_text='[cm]')
+    weight = models.IntegerField(null=True, blank=True, help_text='[kg]')
+    activity = models.CharField(choices=ACTIVITY_CHOICES, max_length=255,
+                                default='office job, no activities') # How active are you?:
+    target = models.CharField(choices=TARGET_CHOICES, max_length=255,
+                              default='I would like lose weight') # help_text='What is your target?'
 
     def __str__(self):
         return f'{self.name} : {self.id}'
