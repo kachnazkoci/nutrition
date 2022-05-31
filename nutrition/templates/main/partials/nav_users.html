@@ -11,16 +11,14 @@ Start Navigation Bar
                         <b class="fas fa-bars"></b>
                     </a>
                 </div>
-            {% comment %}<form class="d-flex" method="post" action="{% url 'search_location' %}"
-            >{% endcomment %}
                 {% csrf_token %}
-
+            {% comment %}<form class="d-flex" method="post" action="{% url 'search_location' %}">
                 <input class="form-control me-2"
                        type="search" name="search" placeholder="
                        Search" aria-label="Search..">
                 <button class="btn
                 btn-outline-secondary" type="submit"> SEARCH </button>
-            </form>
+            </form>{% endcomment %}
             </div>
 
         </div>

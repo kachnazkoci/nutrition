@@ -1,17 +1,27 @@
 {% extends 'base_food.html' %}
+{% load static %}
 {% block content %}
     <div style="padding-left:16px">
-          <h2>Nutrition - Food - {{ object.name }}</h2>
-        </div>
+        <h2>Nutrition - Food - {{ object.name }}</h2>
+    </div>
+    <div style="text-align: right; padding-right:120px; color: rgb(5, 68, 104); line-height: 75%">
+        <sup>created<br>{{ object.created }}</sup>
+        <br><a href="{% url "food_update" food.id %}">
+            <img src="{% static 'images/update.png' %}" alt="update" width="20" height="20">
+        </a>
+    </div>
     Name: {{ object.name }}<br>
-    Created: {{ object.created|date:"d.m Y" }}<br>
     kCal: {{ object.kcal }}<br>
     Protein: {{ object.protein }}<br>
     Fats: {{ object.fats }}<br>
     Carbs: {{ object.carbs }}<br>
-    Recipe:<br><br>
-    {% for recipe in object.recipes.all %}
-        {{ recipe.name }}<br>
-    {% endfor %}
-    <br><br>
+    {% if object.name in object.recipes.all %}
+        Recipe:<br><br>
+        {% for recipe in object.recipes.all %}
+            {{ recipe.name }}<br>
+        {% endfor %}
+    {% else %}
+        <br>
+    {% endif %}
+    <br>
 {% endblock %}

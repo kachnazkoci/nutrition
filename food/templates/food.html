@@ -5,7 +5,7 @@
         </div>
 
     {% for food in object_list %}
-        <p>{{ food.name }} kcal: {{ food.kcal }} - <a href="{% url "food_detail" food.id %}">detail</a> - <a
-                href="{% url "food_update" food.id %}">update</a></p>
+        <p><a href="{% url "food_detail" food.id %}">{{ food.name }}</a>
+        </p>
     {% endfor %}
 {% endblock %}
