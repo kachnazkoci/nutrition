@@ -34,11 +34,11 @@ def ideal_calories_intake(aci, target):
     target_1 = User.TARGET_1
     target_2 = User.TARGET_2
     if target == target_1:
-        ici = aci * 0.8
+        ici = (aci * 0.8)*1.1
     elif target == target_2:
-        ici = aci * 1
+        ici = (aci * 1)*1.1
     else:
-        ici = aci * 1.2
+        ici = (aci * 1.2)*1.1
     return int(ici)
 
 
