@@ -7,8 +7,11 @@
     Birth date: {{ object.birth_date|date:"d.m. Y"}}<br>
     BMI: {{ bmi.0}}<br>
     BMI value: {{ bmi.1}}<br>
-    Target: {{ object.target }}<br>
-    Activities: {{ object.activity }}<br>
-    Ideal Daily Calories Intake: {{ ideal_calories_intake }}<br>
+    What is your target?: {{ object.target }}<br>
+    How active are you?: {{ object.activity }}<br>
+    Ideal Daily Calories Intake: {{ ideal_calories_intake }} <br>
+    Protein: {{ protein_calculation }} [g]<br>
+    Carbs: {{ carbs_calculation }} [g]<br>
+    Fats: {{ fats_calculation }} [g]<br>
 
 {% endblock %}

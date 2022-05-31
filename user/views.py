@@ -7,6 +7,7 @@ from .models import User
 from food.BMI_counter import bmi
 from user.check import gender_check, calcul_age
 from food.cal_counter_user import ideal_calories_intake, basal_metabolic_rate, activity_calorie_input
+from food.nutrients_ratio import protein_calculation, carbs_calculation, fats_calculation
 
 
 class UserListView(ListView):
@@ -31,6 +32,9 @@ class UserDetailView(DetailView):
         context['activity_calorie_input'] = activity_calorie_input(context['basal_metabolic_rate'],
                                                                    self.object.activity)
         context['ideal_calories_intake'] = ideal_calories_intake(context['activity_calorie_input'], self.object.target)
+        context['protein_calculation'] = protein_calculation(context['ideal_calories_intake'], self.object.target)
+        context['carbs_calculation'] = carbs_calculation(context['ideal_calories_intake'], self.object.target)
+        context['fats_calculation'] = fats_calculation(context['ideal_calories_intake'], self.object.target)
         return context
 
 

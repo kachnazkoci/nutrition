@@ -4,7 +4,6 @@ import datetime
 from django.shortcuts import resolve_url
 
 
-
 class User(models.Model):
     GENDER_MALE = 'male'
     GENDER_FEMALE = 'female'

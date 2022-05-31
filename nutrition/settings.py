@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'nutrition.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'newdb.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
