@@ -11,10 +11,10 @@ from user.models import User
 class Food(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
-    kcal = models.IntegerField()
-    protein = models.IntegerField()
-    fats = models.IntegerField()
-    carbs = models.IntegerField()
+    kcal = models.FloatField()
+    protein = models.FloatField()
+    fats = models.FloatField()
+    carbs = models.FloatField()
     #note = models.CharField(max_length=256) # , required=False
 
     def __str__(self):
@@ -31,11 +31,11 @@ class Recipe(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
     ingredients = models.ManyToManyField(Food, related_name='recipes', through='Amount')
-    weight = models.IntegerField()
-    kcal = models.IntegerField()
-    protein = models.IntegerField()
-    fats = models.IntegerField()
-    carbs = models.IntegerField()
+    weight = models.FloatField()
+    kcal = models.FloatField()
+    protein = models.FloatField()
+    fats = models.FloatField()
+    carbs = models.FloatField()
 
     def __str__(self):
         return self.name
