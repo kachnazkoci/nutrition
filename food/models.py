@@ -74,7 +74,6 @@ class Blog(models.Model):
         return resolve_url('blog_detail', pk=self.pk)
 
 
-
 # class BlogPost(models.Model):
 #     title = models.CharField(max_length=255, blank=False, null=False)
 #     body = RichTextField(blank=False, null=False)

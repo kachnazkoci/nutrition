@@ -20,4 +20,5 @@ class Command(BaseCommand):
                     Food(name=row[0], created='2022-06-01', kcal=row[1], carbs=row[2], protein=row[3], fats=row[4]))
         print(len(Food.objects.bulk_create(food)))
 
+
 # python manage.py bulk_create_food food.csv command
