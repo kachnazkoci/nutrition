@@ -1,9 +1,0 @@
-{% extends 'base_user.html' %}
-{% load static %}
-{% block content %}
-
-
-    {% for user in object_list %}
-        <p><a href="{% url "user_detail" user.id %}">{{ user.name }}</a> </p>
-    {% endfor %}
-{% endblock %}

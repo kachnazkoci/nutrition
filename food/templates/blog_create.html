@@ -1,11 +1,11 @@
 {% extends 'base_food.html' %}
-
 {% load static %}
+t
 {% block content %}
     <div style="padding-left:16px">
           <h2>Nutrition - Add Blog POST </h2>
         </div>
-    <form action="{% url 'blog_create' %}" method="post">
+    <form enctype="multipart/form-data" action="{% url 'blog_create' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value=" ADD POST">

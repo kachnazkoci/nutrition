@@ -1,5 +1,5 @@
 from django import forms
-from food.models import Food, Recipe, Blog
+from food.models import Food, Recipe, Blog, Plate
 from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
@@ -71,3 +71,13 @@ class BlogForm(forms.ModelForm):
     def save(self, commit=True):
         blog = super(BlogForm, self).save(commit=commit)
         return blog
+
+
+class PlateForm(forms.ModelForm):
+    class Meta:
+        model = Plate
+        fields = '__all__'
+
+    def __init__(self, user, *args, **kwargs):
+        super(PlateForm, self).__init__(*args, **kwargs)
+        # self.fields['food_selected'].queryset = Food.objects.filter(person_of=user)

@@ -3,6 +3,8 @@ from datetime import date
 import datetime
 from django.shortcuts import resolve_url
 
+from user.check import calcul_age
+
 
 class User(models.Model):
     GENDER_MALE = 'male'
@@ -69,6 +71,9 @@ class User(models.Model):
 
     def get_absolute_url(self):
         return resolve_url('user_detail', pk=self.id)
+
+    def get_age(self):
+        return calcul_age(self.birth_date)
 
 # class BasalMetabolism(models.Model):
 #     ACTIVITY_1 = 'office job, no activities'

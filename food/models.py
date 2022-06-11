@@ -27,6 +27,11 @@ class Food(models.Model):
         return resolve_url('food_detail', pk=self.id)
 
 
+class Plate(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    food_consumed = models.ForeignKey(Food, on_delete=models.CASCADE)
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()

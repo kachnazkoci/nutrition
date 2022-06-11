@@ -1,9 +1,13 @@
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from food.cal_counter_user import basal_metabolic_rate, activity_calorie_input, ideal_calories_intake
+from user.check import calcul_age
+from user.views import UserDetailView
 
-from .forms import FoodForm, RecipeForm, BlogForm
-from .models import Food, Recipe, Blog
+from .forms import FoodForm, RecipeForm, BlogForm, PlateForm
+from .models import Food, Recipe, Blog, Plate, User
 
 
 #########################################
@@ -59,6 +63,52 @@ class DeleteFoodView(DeleteView):
     model = Food
     success_url = reverse_lazy('food')
     extra_context = {'page_name': 'Food'}
+
+
+#########################################
+#####            PLATE              #####
+#########################################
+
+
+def calories_intake(user):
+    user_height = user.height
+    user_weight = user.weight
+    user_gender = user.gender
+    user_age = user.get_age()
+    user_activity = user.activity
+    user_target = user.target
+    bmr = basal_metabolic_rate(user_gender, user_height, user_weight, user_age)
+    aci = activity_calorie_input(bmr, user_activity)
+    return ideal_calories_intake(aci, user_target)
+
+
+def index(request):
+    # user = request.user
+    user = User.objects.first()
+    if request.method == 'POST':
+        food_consumed = request.POST['food_consumed']
+        food = Food.objects.get(name=food_consumed)  # out of food object it will take food as a object
+        plate = Plate(user=User.objects.get(id=user.id), food_consumed=food)
+        plate.save()
+    foods = Food.objects.all()
+    consumed_food = Plate.objects.filter(user=request.user.id)
+    return render(request, 'plate.html',
+                  {'foods': foods, 'consumed_food': consumed_food, 'ideal_calories_intake': calories_intake(user)}, )
+
+
+def delete_consumed_food(request, id):
+    consumed_food = Plate.objects.get(id=id)
+    if request.method == "POST":
+        consumed_food.delete()
+        return redirect('/food/plate')
+    return render(request, 'delete_from_plate.html')
+
+
+# class CreatePlateView(CreateView):
+#     template_name = 'plate.html'
+#     form_class = PlateForm
+#     model = Plate
+#     extra_context = {'page_name': 'Create plate'}
 
 
 #########################################
