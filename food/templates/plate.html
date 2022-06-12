@@ -36,12 +36,13 @@
                                 <table style="border:1;">
                                     <tr>
                                         <th><label for="text_input">Amount:</label></th>
-                                        <th style="width:200px;text-align: center;"><input type="text" id="text_input">
+                                        <th style="width:200px;text-align: center;"><input type="text" name="quantity"
+                                                                                           id="quantity">
                                         </th>
                                         <th>[g]</th>
                                         <th style="width:300px;text-align: center;"><select class="col-md-5"
-                                                                                           name="food_consumed"
-                                                                                           id="food_consumed">
+                                                                                            name="food_consumed"
+                                                                                            id="food_consumed">
                                             {% for food in foods %}
                                                 <option value="{{ food.name }}">{{ food.name }}</option>
                                             {% endfor %}
@@ -63,7 +64,7 @@
                     <h6> Today's consumption </h6>
                 </div>
                 <table id="table" class="table table-striped table-primary">
-                    <tr class="bg-primary text-black">
+                    <tr class="bg-primary text-white">
                         <th>Food item</th>
                         <th>Quantity[g]</th>
                         <th>Calories[kcal]</th>
@@ -72,75 +73,70 @@
                         <th>Carbs[g]</th>
                         <th>Delete item</th>
                     </tr>
-                    {% for c in consumed_food %}
+                    {% for plate in plates %}
                         <tr>
-                            <td>{{ c.food_consumed.name }}</td>
-                            <td>{{ text_input }}</td>
-                            <td>{{ c.food_consumed.kcal }}</td>
-                            <td>{{ c.food_consumed.protein }}</td>
-                            <td>{{ c.food_consumed.fats }}</td>
-                            <td>{{ c.food_consumed.carbs }}</td>
-                            <td><a class="btn-danger" href="{% url 'delete_from_plate' c.id %}"><b>x</b></a></td>
+                            <td>{{ plate.food_consumed.name }}</td>
+                            <td>{{ plate.quantity }}</td>
+                            <td>{{ plate.kcal_amount }}</td>
+                            <td>{{ plate.protein_amount }}</td>
+                            <td>{{ plate.fats_amount }}</td>
+                            <td>{{ plate.carbs_amount }}</td>
+                            <td>
+                                <button class="btn-danger"
+                                        onClick="window.open('{% url 'delete_from_plate' plate.id %}');">
+                                    <span class="bi bi-x">x</span>
+                                </button>
+                            </td>
+
                         </tr>
                     {% endfor %}
 
                     <tr>
                         <td id="name"><b>Total</b></td>
                         <td id="quantity"><b>---</b></td>
-                        <td id="totalKcal"><b></b></td>
-                        <td id="totalProtein"><b></b></td>
-                        <td id="totalFats"><b></b></td>
-                        <td id="totalCarbs"><b></b></td>
+                        <td id="totalKcal"><b>{{ total_kcal }}[kcal]</b></td>
+                        <td id="totalProtein"><b>{{ total_protein }}[g]</b></td>
+                        <td id="totalFats"><b>{{ total_fats }}[g]</b></td>
+                        <td id="totalCarbs"><b>{{ total_carbs }}[g]</b></td>
                     </tr>
                 </table>
 
             </div>
+            <br><br>
             <div class="row"></div>
             <div class="col-md-5">
                 <h6>Today's breakdown</h6>
             </div>
-            <div class="card-header text-black bg-primary">
+
+
+        <div style="text-align: center">
+            <div class="card-header text-white bg-primary" style="max-width: 44rem">
                 <h6>Macronutrients breakdown</h6>
             </div>
+            <div style="padding-left:200px">
             <div class="col-md-5">
                 <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
             </div>
         </div>
 
 
         <script>
-            let table = document.getElementById("table");
-            let kcal = 0, protein = 0, fats = 0, carbs = 0, quantity=parseInt(text_input);
+            let kcal = {{ total_kcal }};
+            let CalIntake = {{ ideal_calories_intake }};
 
-
-            for (let i = 1; i < table.rows.length - 1; i++) {
-                console.log(table.rows[i].cells[1].innerHTML);
-                kcal += quantity*(parseFloat(table.rows[i].cells[1].innerHTML));
-                kcal = Math.round(kcal);
-                protein += parseFloat(table.rows[i].cells[2].innerHTML);
-                protein = Math.round(protein);
-                fats += parseFloat(table.rows[i].cells[3].innerHTML);
-                fats = Math.round(fats);
-                carbs += parseFloat(table.rows[i].cells[4].innerHTML);
-                carbs = Math.round(carbs);
-            }
-            console.log(kcal);
-
-            document.getElementById("totalKcal").innerHTML = '<b>' + kcal + '(kcal)</b>'
-            document.getElementById("totalProtein").innerHTML = '<b>' + protein + '(g)</b>';
-            document.getElementById("totalFats").innerHTML = '<b>' + fats + '(g)</b>';
-            document.getElementById("totalCarbs").innerHTML = '<b>' + carbs + '(g)</b>';
-
-            let CalIntake = {{ ideal_calories_intake }}
-
-                let
             calPer = (kcal / CalIntake) * 100;
             document.getElementsByClassName("progress-bar")[0].setAttribute("style", "width:" + calPer + "%")
 
+
+            let protein = {{ total_protein }};
+            let fats = {{ total_fats }};
+            let carbs = {{ total_carbs }};
+
             let total = carbs + protein + fats;
-            let proteinPercentage = Math.round((protein / total) * 100)
-            let fatsPercentage = Math.round((fats / total) * 100)
-            let carbsPercentage = Math.round((carbs / total) * 100)
+            let proteinPercentage = Math.round((protein / total) * 100);
+            let fatsPercentage = Math.round((fats / total) * 100);
+            let carbsPercentage = Math.round((carbs / total) * 100);
 
             const ctx = document.getElementById('myChart').getContext('2d');
             const myChart = new Chart(ctx, {

@@ -86,14 +86,30 @@ def index(request):
     # user = request.user
     user = User.objects.first()
     if request.method == 'POST':
-        food_consumed = request.POST['food_consumed']
-        food = Food.objects.get(name=food_consumed)  # out of food object it will take food as a object
-        plate = Plate(user=User.objects.get(id=user.id), food_consumed=food)
+        food_name = request.POST['food_consumed']
+        quantity = int(request.POST['quantity'])
+        food = Food.objects.get(name=food_name)  # out of food object it will take food as an object
+        plate = Plate(user=User.objects.get(id=user.id), quantity=quantity, food_consumed=food)
         plate.save()
     foods = Food.objects.all()
-    consumed_food = Plate.objects.filter(user=request.user.id)
+    plates = Plate.objects.filter(user=request.user.id)
+    total_kcal = 0
+    total_protein = 0
+    total_fats = 0
+    total_carbs = 0
+    for plate in plates:
+        plate.kcal_amount = round(plate.food_consumed.kcal * plate.quantity)
+        total_kcal += plate.kcal_amount
+        plate.protein_amount = round(plate.food_consumed.protein * plate.quantity)
+        total_protein += plate.protein_amount
+        plate.fats_amount = round(plate.food_consumed.fats * plate.quantity)
+        total_fats += plate.fats_amount
+        plate.carbs_amount = round(plate.food_consumed.carbs * plate.quantity)
+        total_carbs += plate.carbs_amount
     return render(request, 'plate.html',
-                  {'foods': foods, 'consumed_food': consumed_food, 'ideal_calories_intake': calories_intake(user)}, )
+                  {'foods': foods, 'plates': plates, 'ideal_calories_intake': calories_intake(user),
+                   'total_kcal': total_kcal, 'total_carbs': total_carbs, 'total_fats': total_fats,
+                   'total_protein': total_protein}, )
 
 
 def delete_consumed_food(request, id):

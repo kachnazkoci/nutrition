@@ -34,12 +34,12 @@ class FoodForm(forms.ModelForm):
 
 class RecipeForm(forms.ModelForm):
     created = forms.DateField(widget=DatePickerDateInput())
-    food = forms.ModelMultipleChoiceField(queryset=Food.objects.all())
+    ingredients = forms.ModelMultipleChoiceField(queryset=Food.objects.all())
 
     class Meta:
         model = Recipe
         # fields = '__all__'
-        fields = ['name', 'kcal', 'protein', 'fats', 'carbs', 'food']
+        fields = ['name', 'ingredients', 'weight', 'procedure']
 
     def save(self, commit=True):
         recipe = super(RecipeForm, self).save(commit=commit)
@@ -73,11 +73,3 @@ class BlogForm(forms.ModelForm):
         return blog
 
 
-class PlateForm(forms.ModelForm):
-    class Meta:
-        model = Plate
-        fields = '__all__'
-
-    def __init__(self, user, *args, **kwargs):
-        super(PlateForm, self).__init__(*args, **kwargs)
-        # self.fields['food_selected'].queryset = Food.objects.filter(person_of=user)

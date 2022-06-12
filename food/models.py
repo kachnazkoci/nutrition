@@ -7,7 +7,6 @@ from ckeditor.fields import RichTextField
 from user.models import User
 
 
-
 class Food(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
@@ -15,7 +14,6 @@ class Food(models.Model):
     protein = models.FloatField()
     fats = models.FloatField()
     carbs = models.FloatField()
-    #note = models.CharField(max_length=256) # , required=False
 
     def __str__(self):
         return self.name
@@ -30,18 +28,15 @@ class Food(models.Model):
 class Plate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     food_consumed = models.ForeignKey(Food, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=0)
 
 
 class Recipe(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
-    ingredients = models.ManyToManyField(Food, through='Amount')
-    weight = models.IntegerField()
-    food = models.ManyToManyField(Food, related_name='recipes')
-    kcal = models.FloatField()
-    protein = models.FloatField()
-    fats = models.FloatField()
-    carbs = models.FloatField()
+    ingredients = models.ForeignKey(Food, on_delete=models.CASCADE)
+    weight = models.IntegerField(default=0)
+    procedure = RichTextField(default='')
 
     def __str__(self):
         return self.name
