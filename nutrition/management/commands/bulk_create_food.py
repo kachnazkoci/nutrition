@@ -18,5 +18,6 @@ class Command(BaseCommand):
             next(r, None)
             food = []
             for row in r:
-                food.append(Food(name=row[0], created='2022-06-01', kcal=row[1], carbs=row[2], protein=row[3], fats=row[4]))
+                food.append(Food(name=row[0], created='2022-06-01', kcal=row[1], carbs=row[2], protein=row[3],
+                                 fats=row[4]))
         print(len(Food.objects.bulk_create(food)))

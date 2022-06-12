@@ -6,7 +6,7 @@ from food.cal_counter_user import basal_metabolic_rate, activity_calorie_input, 
 from user.check import calcul_age
 from user.views import UserDetailView
 
-from .forms import FoodForm, RecipeForm, BlogForm, PlateForm
+from .forms import FoodForm, RecipeForm, BlogForm
 from .models import Food, Recipe, Blog, Plate, User
 
 
@@ -31,6 +31,9 @@ class FoodListView(ListView):
     model = Food
     template_name = 'food.html'
     extra_context = {'page_name': 'Food'}
+
+    def get_queryset(self):
+        return Food.objects.order_by('name')
 
 
 class FoodDetailView(DetailView):
@@ -91,7 +94,7 @@ def index(request):
         food = Food.objects.get(name=food_name)  # out of food object it will take food as an object
         plate = Plate(user=User.objects.get(id=user.id), quantity=quantity, food_consumed=food)
         plate.save()
-    foods = Food.objects.all()
+    foods = Food.objects.order_by('name').all()
     plates = Plate.objects.filter(user=request.user.id)
     total_kcal = 0
     total_protein = 0
