@@ -6,8 +6,12 @@ from food.cal_counter_user import basal_metabolic_rate, activity_calorie_input, 
 from user.check import calcul_age
 from user.views import UserDetailView
 
+
 from .forms import FoodForm, RecipeForm, BlogForm
-from .models import Food, Recipe, Blog, Plate, User
+from .models import Food, Recipe, Blog, Plate
+from user.models import User
+
+
 
 
 #########################################
@@ -74,25 +78,24 @@ class DeleteFoodView(DeleteView):
 
 
 def calories_intake(user):
-    user_height = user.height
     user_weight = user.weight
+    user_height = user.height
     user_gender = user.gender
     user_age = user.get_age()
     user_activity = user.activity
     user_target = user.target
-    bmr = basal_metabolic_rate(user_gender, user_height, user_weight, user_age)
+    bmr = basal_metabolic_rate(user_gender, user_weight, user_height, user_age)
     aci = activity_calorie_input(bmr, user_activity)
     return ideal_calories_intake(aci, user_target)
 
 
 def index(request):
-    # user = request.user
-    user = User.objects.first()
+    user = request.user
     if request.method == 'POST':
         food_name = request.POST['food_consumed']
         quantity = int(request.POST['quantity'])
         food = Food.objects.get(name=food_name)  # out of food object it will take food as an object
-        plate = Plate(user=User.objects.get(id=user.id), quantity=quantity, food_consumed=food)
+        plate = Plate(user=user, quantity=quantity, food_consumed=food)
         plate.save()
     foods = Food.objects.order_by('name').all()
     plates = Plate.objects.filter(user=request.user.id)

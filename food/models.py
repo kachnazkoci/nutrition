@@ -2,6 +2,7 @@ from django.db import models
 from django.shortcuts import resolve_url
 from django.template.defaultfilters import slugify
 from ckeditor.fields import RichTextField
+from django.conf import settings
 
 #from food.forms import BlogForm
 from user.models import User
@@ -26,7 +27,7 @@ class Food(models.Model):
 
 
 class Plate(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     food_consumed = models.ForeignKey(Food, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
 

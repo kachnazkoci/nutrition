@@ -4,6 +4,8 @@ from .models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'name')
+    list_display = ('id', 'title', 'first_name', 'last_name')
     list_filter = ('id', )
+
+
 

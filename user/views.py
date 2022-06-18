@@ -19,11 +19,10 @@ class UserListView(ListView):
 class UserDetailView(DetailView):
     model = User
     template_name = 'user_detail.html'
-    extra_context = {'page_name': User.name}
 
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context.update({'page_name': self.object.name})
+        context.update({'page_name': self.object.first_name})
         context['bmi'] = bmi(self.object.weight, self.object.height)
         context['age'] = calcul_age(self.object.birth_date)
         context['gender'] = gender_check(self.object.title)

@@ -3,6 +3,7 @@ from user.models import User
 from django.utils import timezone
 from datetime import timedelta
 from django.core.exceptions import ValidationError
+from django.contrib.auth.hashers import make_password
 
 
 class DatePickerDateInput(forms.DateInput):
@@ -26,7 +27,13 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = '__all__'
+        exclude = ['last_login', 'is_superuser', 'groups', 'user_permissions', 'is_staff', 'is_active',
+                   'date_joined']
+
+    def clean_password(self):
+        password = self.cleaned_data['password']
+        hashed_password = make_password(password)
+        return hashed_password
 
     def save(self, commit=True):
         user = super(UserForm, self).save(commit=commit)
@@ -44,7 +51,6 @@ class ContactForm(forms.Form):
 
     def clean_name(self):
         return self.data.get('name').lower()
-
 
 # class BasalMetabolism(forms.ModelForm):
 #     ACTIVITY_1 = 'office job, no activities'
