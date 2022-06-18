@@ -1,8 +1,15 @@
-from django.shortcuts import render
+from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect
+from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.contrib import messages
+from django.views.generic.edit import FormMixin
 
-from .forms import UserForm
+from .forms import UserForm, RegistrationForm
 from .models import User
 from food.BMI_counter import bmi
 from user.check import gender_check, calcul_age
@@ -73,3 +80,53 @@ class DeleteUserView(DeleteView):
 #         return render(request,
 #                       'search_users.html',
 #                       {})
+
+class LogoutView(View):
+    """
+    NOTE: Django has built it LogoutView (from django.contrib.auth.views import LogoutView)
+    but this django LogoutView expect us to have logout template.
+
+    In our case we will have LogoutView in the base template. So we implement it ourselves.
+    """
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('homepage')
+
+
+class LoginView(LoginView):
+    """
+    NOTE: Django has built it LoginView (from django.contrib.auth.views import LoginView).
+
+    Reason why I'm not using it is that I wanted to explain how is it done under the hood
+    """
+    template_name = 'login.html'
+    form_class = AuthenticationForm
+
+    def post(self, request, *args, **kwargs):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            messages.success(request, 'Log in successfully')
+            return redirect('homepage')
+
+        messages.error(request, 'Wrong credentials')
+        return redirect('account:login')
+
+
+class SignUp(CreateUserView):
+    template_name = 'register.html'
+    form_class = RegistrationForm
+
+    def post(self, request,  *args, **kwargs):
+        registration_data = request.POST
+        form = self.form_class(registration_data)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Account {form.cleaned_data.get("username")} successfully created')
+            return redirect('account:login')
+        else:
+            messages.error(request, f'Something wrongs')
+            return TemplateResponse(request, 'registration.html', context={'form': form})
+

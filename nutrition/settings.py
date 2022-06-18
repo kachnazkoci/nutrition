@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'nutrition',
     'food',
     'user',
-    'ckeditor'
+    'ckeditor',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nutrition.wsgi.application'
 
+LOGIN_REDIRECT_URL = 'home'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

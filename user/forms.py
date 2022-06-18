@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+
 from user.models import User
 from django.utils import timezone
 from datetime import timedelta
@@ -52,6 +54,9 @@ class ContactForm(forms.Form):
     def clean_name(self):
         return self.data.get('name').lower()
 
+
+
+
 # class BasalMetabolism(forms.ModelForm):
 #     ACTIVITY_1 = 'office job, no activities'
 #     ACTIVITY_2 = 'office job, training twice per week'
@@ -83,3 +88,9 @@ class ContactForm(forms.Form):
 #     class Meta:
 #         model = BasalMetabolism
 #         fields = '__all__'
+
+
+class RegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
