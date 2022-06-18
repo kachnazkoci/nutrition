@@ -62,14 +62,14 @@ class ContactForm(forms.Form):
 class BlogForm(forms.ModelForm):
     timestamp = forms.DateField(widget=DatePickerDateInput())
     name = forms.CharField()
-    image = forms.ImageField()
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = Blog
         fields = '__all__'
 
-    def save(self, commit=True):
-        blog = super(BlogForm, self).save(commit=commit)
-        return blog
+    # def save(self, commit=True):
+    #     blog = super(BlogForm, self).save(commit=commit)
+    #     return blog
 
 

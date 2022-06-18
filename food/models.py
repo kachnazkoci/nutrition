@@ -34,7 +34,7 @@ class Plate(models.Model):
 class Recipe(models.Model):
     name = models.CharField(max_length=256)
     created = models.DateField()
-    ingredients = models.ForeignKey(Food, on_delete=models.CASCADE)
+    ingredients = models.ForeignKey(Food, on_delete=models.CASCADE, null=True)
     weight = models.IntegerField(default=0)
     procedure = RichTextField(default='')
 
@@ -57,7 +57,7 @@ class Blog(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=250, blank=True, null=True)
     body = RichTextField(blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to="{% static 'images' %}")
+    image = models.ImageField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     # def save(self, commit=True):
