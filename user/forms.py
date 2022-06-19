@@ -26,6 +26,7 @@ class DateFieldSevenDaysFromNow(forms.DateField):
 class UserForm(forms.ModelForm):
     birth_date = forms.DateField(widget=DatePickerDateInput())
     created_date = forms.DateField(widget=DatePickerDateInput())
+    password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
@@ -89,6 +90,8 @@ class ContactForm(forms.Form):
 
 
 class RegistrationForm(UserCreationForm):
+    birth_date = forms.DateField(widget=DatePickerDateInput())
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2', 'gender', 'birth_date', 'height', 'weight', 'title']

@@ -88,6 +88,7 @@ class LogoutView(View):
 
     In our case we will have LogoutView in the base template. So we implement it ourselves.
     """
+
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect('home')
@@ -114,12 +115,13 @@ class SignUp(FormMixin, TemplateView):
     template_name = 'registration/register.html'
     form_class = RegistrationForm
 
-    def post(self, request,  *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         registration_data = request.POST
         form = self.form_class(registration_data)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Account {form.cleaned_data.get("username")} successfully created')
+            messages.success(request,
+                             f'Account {form.cleaned_data.get("username")} successfully created. Please complete your profile in Users/User List/{form.fields("username")}')
             return redirect('login')
         else:
             messages.error(request, f'Something wrongs')

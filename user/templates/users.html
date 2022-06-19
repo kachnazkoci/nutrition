@@ -6,4 +6,7 @@
     {% for user in object_list %}
         <p><a href="{% url "user_detail" user.id %}">{{ user.first_name }} {{ user.last_name }}</a> </p>
     {% endfor %}
+{#    {% for new_account in user_list %}#}
+{#        <p><a href="{% url "user_detail" user.id %}">{{ user.first_name }} {{ user.last_name }}</a> </p>#}
+{#    {% endfor %}#}
 {% endblock %}

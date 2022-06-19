@@ -1,18 +1,20 @@
 {% extends 'base_food.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+    {% load crispy_forms_tags %}
     <div style="padding-left:16px">
               <h2>Nutrition - Add Blog POST </h2>
         </div>
     <div class="container">
-    <div style="padding-right: ">
-    <form enctype="multipart/form-data" action="{% url 'blog_create' %}" method="post">
         {% crispy form %}
+    <form enctype="multipart/form-data" action="{% url 'blog_create' %}" method="post">
+
 
     </form>
     </div>
-    </div>
+
 
 {% endblock %}
+
 
 
