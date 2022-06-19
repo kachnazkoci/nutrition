@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div style="text-align: right; padding-right:120px; color: rgb(5, 68, 104)">{{ object.first_name }}<br>
-        <sup>{{ object.timestamp }}</sup>
+        <sup>{{ object.date_joined }}</sup>
         <a href="{% url "user_update" user.id %}">
             <img src="{% static 'images/update.png' %}" alt="update" title="Click for update user" width="30"
                  height="30">

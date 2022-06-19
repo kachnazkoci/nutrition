@@ -55,8 +55,6 @@ class ContactForm(forms.Form):
         return self.data.get('name').lower()
 
 
-
-
 # class BasalMetabolism(forms.ModelForm):
 #     ACTIVITY_1 = 'office job, no activities'
 #     ACTIVITY_2 = 'office job, training twice per week'
@@ -93,4 +91,11 @@ class ContactForm(forms.Form):
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2', 'gender', 'birth_date', 'height', 'weight', 'title']
+
+    def save(self, commit=True):
+        user = super(RegistrationForm, self).save(commit=False)
+        user.username = self.cleaned_data['username']
+        if commit:
+            user.save()
+        return user

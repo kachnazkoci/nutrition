@@ -90,15 +90,10 @@ class LogoutView(View):
     """
     def get(self, request, *args, **kwargs):
         logout(request)
-        return redirect('homepage')
+        return redirect('home')
 
 
 class LoginView(LoginView):
-    """
-    NOTE: Django has built it LoginView (from django.contrib.auth.views import LoginView).
-
-    Reason why I'm not using it is that I wanted to explain how is it done under the hood
-    """
     template_name = 'login.html'
     form_class = AuthenticationForm
 
@@ -109,14 +104,14 @@ class LoginView(LoginView):
         if user:
             login(request, user)
             messages.success(request, 'Log in successfully')
-            return redirect('homepage')
+            return redirect('home')
 
         messages.error(request, 'Wrong credentials')
-        return redirect('account:login')
+        return redirect('login')
 
 
-class SignUp(CreateUserView):
-    template_name = 'register.html'
+class SignUp(FormMixin, TemplateView):
+    template_name = 'registration/register.html'
     form_class = RegistrationForm
 
     def post(self, request,  *args, **kwargs):
@@ -125,8 +120,8 @@ class SignUp(CreateUserView):
         if form.is_valid():
             form.save()
             messages.success(request, f'Account {form.cleaned_data.get("username")} successfully created')
-            return redirect('account:login')
+            return redirect('login')
         else:
             messages.error(request, f'Something wrongs')
-            return TemplateResponse(request, 'registration.html', context={'form': form})
-
+            return TemplateResponse(request, 'registration/register.html', context={'form': form})
+        # return redirect('home')

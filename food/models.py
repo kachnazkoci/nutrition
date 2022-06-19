@@ -3,8 +3,6 @@ from django.shortcuts import resolve_url
 from django.template.defaultfilters import slugify
 from ckeditor.fields import RichTextField
 from django.conf import settings
-
-#from food.forms import BlogForm
 from user.models import User
 
 
@@ -61,10 +59,6 @@ class Blog(models.Model):
     image = models.ImageField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
-    # def save(self, commit=True):
-    #     blog = super(BlogForm, self).save(commit=commit)
-    #     blog.food.add(*self.cleaned_data.get('food'))
-    #     return blog
 
     # def __str__(self):
     #     return self.name

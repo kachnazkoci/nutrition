@@ -11,8 +11,8 @@ from user.views import LogoutView, SignUp
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('user/registration/login/', LoginView.as_view(), name='login'),
-    path('user/registration/register/', SignUp.as_view(), name='register'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('user/registration/register/', SignUp.as_view(), name='register'),
     path('admin/', admin.site.urls),
     path('contact/', ContactView.as_view(), name='contact'),
     path('users/', include('user.urls'), name='users'),

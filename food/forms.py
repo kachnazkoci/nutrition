@@ -1,3 +1,5 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from django import forms
 from food.models import Food, Recipe, Blog, Plate
 from django.utils import timezone
@@ -63,10 +65,18 @@ class BlogForm(forms.ModelForm):
     timestamp = forms.DateField(widget=DatePickerDateInput())
     name = forms.CharField()
     image = forms.ImageField(required=False)
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'SUBMIT', css_class='btn-primary'))
+    helper.form_method = 'POST'
 
     class Meta:
         model = Blog
         fields = '__all__'
+
+    # def save(self, commit=True):
+    #     blog = super(BlogForm, self).save(commit=commit)
+    #     blog.food.add(*self.cleaned_data.get('food'))
+    #     return blog
 
     # def save(self, commit=True):
     #     blog = super(BlogForm, self).save(commit=commit)
